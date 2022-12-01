@@ -1,0 +1,71 @@
+{% extends 'home.html' %}
+{% block content %}
+
+<style>
+    .slider{
+        background-color: white;
+        border: none;
+        padding: 3%;
+        border-radius: 10px;
+        box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1) , 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    }
+    #lon1,#lon2,#lat1,#lat2{
+        margin-right: 5%;
+    }
+
+    #lon1rangevalue,#lon2rangevalue,#lat1rangevalue,#lat2rangevalue{
+        background-color: transparent;
+        border: none;
+        box-shadow: inset 0 -3em 3em rgba(70, 76, 136, 0.225);
+        border-radius: 10PX;
+        padding: 1%;
+    }
+    button{
+        align-content: center;
+        width: 100%;
+    }
+</style>
+<nav class="navbar navbar-expand-lg navbar-dark" id="nav1">
+    <a class="navbar-brand" href="/">Spatial Data Science</a>      
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" href="/spatial">Spatial Range Query</a>
+            <a class="nav-item nav-link" href="/temporal">Spatiotemporal Range Query</a>
+            <a class="nav-item nav-link" href="/knn">KNN Query</a>
+            <a class="nav-item nav-link" href="/trips">Trips Layer</a>
+        </div>
+    </div>
+</nav>
+<form action="spatial_" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+<div class="container">
+    <h3><b>Spatial Range Query</b></h3>
+    <hr>
+    <h4>Longitude</h4>
+    <div class="slider">
+       <input type="range" id="lon1" name="lon1" max={{max_lon}} min={{min_lon}} step={{step_lon}} value={{mean_lon}} oninput="lon1rangevalue.value=value"/>
+        <input type="number" name="lon1rangevalue" max={{max_lon}} min={{min_lon}} step={{step_lon}} value={{mean_lon}} oninput="range.value=value" style="margin-right: 10%;">
+        <input type="range" id="lon2" name="lon2" max={{max_lon}} min={{min_lon}} step={{step_lon}} value={{mean_lon}} oninput="lon2rangevalue.value=value">
+        <input type="number" name="lon2rangevalue" max={{max_lon}} min={{min_lon}} step={{step_lon}} value={{mean_lon}} oninput="range.value=value">
+      <!--  <input type="number" id="lon1" name="lon1" max="-111.9200000000000" min="-111.93752528000000" step="0.000000000000001" value="-111.93752528000000">
+        <input type="number" id="lon2" name="lon2" max="-111.9200000000000" min="-111.93752528000000" step="0.000000000000001" value="-111.93752528000000">
+      -->
+    </div><br>
+    
+    <h4>Latitude</h4>
+    <div class="slider">
+        <input type="range" id="lat1" name="lat1" max={{max_lat}} min={{min_lat}} step={{step_lat}} value={{mean_lat}} oninput="lat1rangevalue.value=value">
+        <input type="number" name="lat1rangevalue"  max={{max_lat}} min={{min_lat}} step={{step_lat}} value={{mean_lat}} oninput="range.value=value" style="margin-right: 10%;">
+        <input type="range" id="lat2" name="lat2" max={{max_lat}} min={{min_lat}} step={{step_lat}} value={{mean_lat}} oninput="lat2rangevalue.value=value">
+        <input type="number" name="lat2rangevalue"  max={{max_lat}} min={{min_lat}} step={{step_lat}} value={{mean_lat}} oninput="range.value=value"> 
+      <!--  <input type="number" id="lat1" name="lat1" min="33.41400000000000" max="33.43096180000000" step=".000000000000001" value="33.41400000000000" >
+        <input type="number" id="lat2" name="lat2"  min="33.41400000000000" max="33.43096180000000" step=".000000000000001" value="33.41400000000000">
+      -->
+    </div><br>
+    
+        <input type="submit" class="btn btn-dark btn-secondary btn-lg btn-block">
+    
+</div>
+</form>
+
+{% endblock %}

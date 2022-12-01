@@ -1,0 +1,62 @@
+
+{% extends 'home.html' %}
+{% block content %}
+<style>
+    .slider{
+        background-color: white;
+        border: none;
+        padding: 3%;
+        border-radius: 10px;
+        box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1) , 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    }
+    #trac1,#trac2,#kval1,#kval2{
+        margin-right: 2%;
+    }
+
+    #trac1rangevalue,#trac2rangevalue,#kval1rangevalue,#kval2rangevalue{
+        background-color: transparent;
+        border: none;
+        box-shadow: inset 0 -3em 3em rgba(70, 76, 136, 0.225);
+        border-radius: 10PX;
+        padding: 1%;
+    }
+    button{
+        align-content: center;
+        width: 100%;
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-dark" id="nav1">
+    <a class="navbar-brand" href="/">Spatial Data Science</a>      
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" href="/spatial">Spatial Range Query</a>
+            <a class="nav-item nav-link" href="/temporal">Spatiotemporal Range Query</a>
+            <a class="nav-item nav-link" href="/knn">KNN Query</a>
+            <a class="nav-item nav-link" href="/trips">Trips Layer</a>
+        </div>
+    </div>
+</nav>
+<form action="knn_" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+<div class="container">
+    <h3><b>K-Nearest Neighbour</b></h3>
+    <hr>
+    <h4>Trajectory Data</h4>
+    <div class="slider">
+        <input type="range" id="trac" name="trac" min={{min_id}} max={{max_id}} value="0" oninput="trac1rangevalue.value=value">
+        <input type="number" name="trac1rangevalue" value="0" oninput="range.value=value" style="margin-right: 10%;">
+    </div><br>
+    
+    <h4>K Value</h4>
+    <div class="slider">
+        <input type="range" id="kval" name="kval" min=1 max={{k_range}} value="1" oninput="kval1rangevalue.value=value">
+        <input type="number" name="kval1rangevalue" value="1" oninput="range.value=value" style="margin-right: 10%;">
+    </div><br>
+
+        <input type="submit" class="btn btn-dark btn-secondary btn-lg btn-block">
+</div>
+</form>
+
+{% endblock %}
+

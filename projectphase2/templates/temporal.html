@@ -1,0 +1,75 @@
+{% extends 'home.html' %}
+{% block content %}
+<style>
+    .slider{
+        background-color: white;
+        border: none;
+        padding: 3%;
+        border-radius: 10px;
+        box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1) , 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    }
+    #lon3,#lon4,#lat3,#lat4,#time1,#time2{
+        margin-right: 5%;
+    }
+
+    #lon3rangevalue,#lon4rangevalue,#lat3rangevalue,#lat4rangevalue,#time1rangevalue,#time2rangevalue{
+        background-color: transparent;
+        border: none;
+        box-shadow: inset 0 -3em 3em rgba(70, 76, 136, 0.225);
+        border-radius: 10PX;
+        padding: 1%;
+    }
+    button{
+        align-content: center;
+        width: 100%;
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-dark" id="nav1">
+    <a class="navbar-brand" href="/">Spatial Data Science</a>      
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" href="/spatial">Spatial Range Query</a>
+            <a class="nav-item nav-link" href="/temporal">Spatiotemporal Range Query</a>
+            <a class="nav-item nav-link" href="/knn">KNN Query</a>
+            <a class="nav-item nav-link" href="/trips">Trips Layer</a>
+        </div>
+    </div>
+</nav>
+
+<form action="temporal_" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+<div class="container">
+    <h3><b>Spatio Temporal Range</b></h3>
+    <hr>
+    <h4>Longitude</h4>
+    <div class="slider">
+        <input type="range" id="lon3" name="lon3" max={{max_lon}} min={{min_lon}} step={{step_lon}} value={{mean_lon}} oninput="lon3rangevalue.value=value"/>
+        <input type="number" name="lon3rangevalue" max={{max_lon}} min={{min_lon}} step={{step_lon}} value={{mean_lon}} oninput="range.value=value" style="margin-right: 10%;">
+        <input type="range" id="lon4" name="lon4" max={{max_lon}} min={{min_lon}} step={{step_lon}} value={{mean_lon}} oninput="lon4rangevalue.value=value">
+        <input type="number" name="lon4rangevalue" max={{max_lon}} min={{min_lon}} step={{step_lon}} value={{mean_lon}} oninput="range.value=value">
+    </div><br>
+    
+    <h4>Latitude</h4>
+    <div class="slider">
+        <input type="range" id="lat3" name="lat3" max={{max_lat}} min={{min_lat}} step={{step_lat}} value={{mean_lat}} oninput="lat3rangevalue.value=value">
+        <input type="number" name="lat3rangevalue"  max={{max_lat}} min={{min_lat}} step={{step_lat}} value={{mean_lat}} oninput="range.value=value" style="margin-right: 10%;">
+        <input type="range" id="lat4" name="lat4" max={{max_lat}} min={{min_lat}} step={{step_lat}} value={{mean_lat}} oninput="lat4rangevalue.value=value">
+        <input type="number" name="lat4rangevalue"  max={{max_lat}} min={{min_lat}} step={{step_lat}} value={{mean_lat}} oninput="range.value=value">
+    </div><br>
+
+    <h4>Timestamp</h4>
+    <div class="slider">
+        <input type="range" id="time1" name="time1" min={{min_time}} max={{max_time}} value={{min_time}} oninput="time1rangevalue.value=value">
+        <input type="number" id="time1rangevalue" name="time1rangevalue" min={{min_time}} max={{max_time}} value={{min_time}} oninput="range.value=value" style="margin-right: 10%;">
+        <input type="range" id="time2" name="time2" min={{min_time}} max={{max_time}} value={{min_time}} oninput="time2rangevalue.value=value">
+        <input type="number" id="time2rangevalue" name="time2rangevalue" min={{min_time}} max={{max_time}} value={{min_time}} oninput="range.value=value">
+    </div>
+
+        <input type="submit"  class="btn btn-dark btn-secondary btn-lg btn-block" style="margin-top: 2%;">
+    
+</div>
+</form>
+{% endblock %}
+
+
